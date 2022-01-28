@@ -1,47 +1,59 @@
+const server = require('./server');
 const request = require('supertest');
 const db = require('../data/dbConfig');
-const server = require('./server');
+require('dotenv').config();
 
-// Write your tests here
-test('sanity', () => {
-  expect(true).toBe(true)
+test('Expect test env to be  testing', () => {
+  expect(process.env.NODE_ENV).toEqual('testing')
+});
+
+beforeAll(async () => {
+  await db.migrate.rollback()
+  await db.migrate.latest()
+});
+
+afterAll(async () => {
+  await db.destroy()
 })
 
-test('is the correct environment', () => {
-  expect(process.env.NODE_ENV).toBe('testing')
-})
+beforeEach(async () => { 
+    await request(server).post('/api/auth/register')
+      .send({ username: "test",
+              password: "thisisrandom"
+      })
+  })
 
 describe('[POST] /register', () => {
-  test('responds with error when no username', async () => {
-    const res = await request(server).post('/api/auth/register').send({
-      username: '', 
-      password: 'abcd',
-    })
-    expect(res.body).toMatchObject({message: 'username and password required'})
+  test('add user to the database', async () => {
+    const users = await db('users')
+    expect(users).toHaveLength(1)
   })
-   
-  test('responds with error when no password', async () => {
-    const res = await request(server).post('/api/auth/register').send({
-      username: 'bill', 
-      password: '',
-    })
-    expect(res.body).toMatchObject({message: 'username and password required'})
-})
+  test('check the new user is added', async () => {
+    const users = await db('users')
+    expect(users[0].username).toEqual("test")
+  })
+  test('check the hashing', async () => {
+    const users = await db('users')
+    expect(users[0].password).not.toBe("thisisrandom")
+  })
+  
 })
 
 describe('[POST] /login', () => {
-  test('responds with error when no username', async () => {
-    const res = await request(server).post('/login').send({
-      username: '', 
-      password: 'abcd'
-    })
-    expect(res.status).toBe(404)
+  let login
+  beforeEach(async () => {
+    login = await request(server).post('/api/auth/login')
+      .send({ username: "test",
+              password: "thisisrandom"
+      })
   })
-  test('responds with error when no password', async () => {
-    const res = await request(server).post('/api/auth/login').send({
-      username: 'bill', 
-      password: '',
-    })
-    expect(res.body).toMatchObject({message: 'username and password required'})
+
+  test('User login contains  token', async () => {
+    expect(login.text).toMatch('token')
   })
+  test('User login contains  token', async () => {
+    expect(login.text).toMatch('message')
+  })
+
+  
 })
