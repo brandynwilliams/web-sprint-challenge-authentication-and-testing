@@ -54,6 +54,16 @@ Your finished project must include all of the following requirements (further in
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
+When using sessions, each client will have a unique session stored on the server. When using sessions we need to use cookies to transmit information between the client and server. Sessions remain active until they reach the expiration time configured when they were created, but we need to invalidate the session immediately when a user logs out. We achieve this by removing the session from our session store. Sessions are best for stateless authentication. JSON Web Tokens are best for stateful authentication. The three main parts of a JSON web token are: header, payload and signature. JSON Web Tokens (JWT) are a way to transmit information between parties in the form of a JSON object. 
+
+
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
+bcryptjs has many features including password hashing, implementing salting both manually and automatically and accumulative hashing rounds. Having an algorithm that hashes the information multiple rounds means an attacker needs to have the hash, know the algorithm used, and how many rounds were used to generate the hash in the first place which helps us store passwords in a more secure manner. 
+
+
 3. How are unit tests different from integration and end-to-end testing?
+Unit tests are smaller more isolated tests, where as integration and end to end testing is more broad scale. For example, Integration is testing connected functionality and interactions. End to end testing is testing entire workflows and applications. In short unit tests are useful for testing functions in isolation. 
+
+
 4. How does _Test Driven Development_ change the way we write applications and tests?
+Test Driven Development makes us write the tests before we write the code. It helps make us begin with the end product in mind, which allows us to write better code and identify edge cases easier.
