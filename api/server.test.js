@@ -12,36 +12,36 @@ test('is the correct environment', () => {
 })
 
 describe('[POST] /register', () => {
-  test('responds with error when no username is present', async () => {
+  test('responds with error when no username', async () => {
     const res = await request(server).post('/api/auth/register').send({
       username: '', 
       password: 'abcd',
     })
-    expect(res.body).toMatchObject({message: 'Username and Password are Required'})
+    expect(res.body).toMatchObject({message: 'username and password required'})
   })
    
-  test('responds with error when no password is present', async () => {
+  test('responds with error when no password', async () => {
     const res = await request(server).post('/api/auth/register').send({
       username: 'bill', 
       password: '',
     })
-    expect(res.body).toMatchObject({message: 'Username and Password are Required'})
+    expect(res.body).toMatchObject({message: 'username and password required'})
 })
 })
 
 describe('[POST] /login', () => {
-  test('responds with error when no username present', async () => {
+  test('responds with error when no username', async () => {
     const res = await request(server).post('/login').send({
       username: '', 
       password: 'abcd'
     })
     expect(res.status).toBe(404)
   })
-  test('responds with error when no password present', async () => {
+  test('responds with error when no password', async () => {
     const res = await request(server).post('/api/auth/login').send({
       username: 'bill', 
       password: '',
     })
-    expect(res.body).toMatchObject({message: 'Username and Password are Required'})
+    expect(res.body).toMatchObject({message: 'username and password required'})
   })
 })
