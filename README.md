@@ -62,7 +62,7 @@ bcryptjs has many features including password hashing, implementing salting both
 
 
 3. How are unit tests different from integration and end-to-end testing?
-Unit tests are smaller more isolated tests, where as integration and end to end testing is more broad scale. For example, Integration is testing connected functionality and interactions. End to end testing is testing entire workflows and applications. In short unit tests are useful for testing functions in isolation. 
+Unit tests are smaller more isolated tests, where as integration and end to end testing is more broad scale. For example, Integration is testing connected functionality and interactions. End to end testing is testing - entire workflows and applications. In short unit tests are useful for testing functions in isolation. 
 
 
 4. How does _Test Driven Development_ change the way we write applications and tests?
