@@ -54,7 +54,7 @@ Your finished project must include all of the following requirements (further in
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
-When using sessions, each client will have a unique session stored on the server. When using sessions we need to use cookies to transmit information between the client and server. Sessions remain active until they reach the expiration time configured when they were created, but we need to invalidate the session immediately when a user logs out. We achieve this by removing the session from our session store. Sessions are best for stateless authentication. JSON Web Tokens are best for stateful authentication. The three main parts of a JSON web token are: header, payload and signature. JSON Web Tokens (JWT) are a way to transmit information between parties in the form of a JSON object. 
+When using sessions, each client will have a unique session stored on the server. When using sessions we need to use cookies to transmit information between the client and server. Sessions remain active until they reach the expiration time configured when they were created, but we need to invalidate the session immediately when a user logs out. We achieve this by removing the session from our session store. Sessions are best for stateful authentication authentication. JSON Web Tokens are best for stateless authentication. The three main parts of a JSON web token are: header, payload and signature. JSON Web Tokens (JWT) are a way to transmit information between parties in the form of a JSON object. 
 
 
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
